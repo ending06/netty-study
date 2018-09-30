@@ -1,4 +1,4 @@
-package com.netty.server.demo;
+package com.netty.server.demo.demo1;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -27,11 +27,10 @@ public class DiscardServer {
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)//
                     .childHandler(new ChannelInitializer<SocketChannel>() { //
-                                @Override
-                                public void initChannel(SocketChannel ch) throws Exception {
-                                    ch.pipeline().addLast(new DiscardServerHandler());
-                                }
-                            }).option(ChannelOption.SO_BACKLOG, 128) //
+                        @Override public void initChannel(SocketChannel ch) throws Exception {
+                            ch.pipeline().addLast(new DiscardServerHandler());
+                        }
+                    }).option(ChannelOption.SO_BACKLOG, 128) //
                     .childOption(ChannelOption.SO_KEEPALIVE, true); //
 
             // Bind and start to accept incoming connections.
