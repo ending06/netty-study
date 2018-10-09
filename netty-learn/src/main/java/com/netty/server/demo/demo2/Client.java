@@ -26,20 +26,19 @@ public class Client {
 
         final String serverIp = "127.0.0.1";
 
-        bootstrap
-                .group(group)//
+        bootstrap.group(group)//
                 .channel(NioSocketChannel.class)//
                 .handler(new ChannelInitializer<SocketChannel>() {
-            @Override
-            protected void initChannel(SocketChannel ch) throws Exception {
-                ch.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingDecoder());
-                ch.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingEncoder());
-                ch.pipeline().addLast(new ClientHandler(port));
+                    @Override
+                    protected void initChannel(SocketChannel ch) throws Exception {
+                        ch.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingDecoder());
+                        ch.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingEncoder());
+                        ch.pipeline().addLast(new ClientHandler(port));
 
-            }
-        });
+                    }
+                });
 
-        ChannelFuture channelFuture = bootstrap.connect(serverIp,port).sync();
+        ChannelFuture channelFuture = bootstrap.connect(serverIp, port).sync();
 
         channelFuture.channel().closeFuture().sync();
 
