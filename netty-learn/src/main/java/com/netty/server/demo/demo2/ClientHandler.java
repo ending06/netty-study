@@ -7,8 +7,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 
 /**
@@ -16,7 +16,7 @@ import io.netty.util.ReferenceCountUtil;
  * <p>@author ruirui.qu Initial Created at 18/10/8<p>
  * -------------------------------------------------------
  **/
-public class ClientHandler extends ChannelHandlerAdapter {
+public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     private static final String SUCCESS = "OK";
 
@@ -36,6 +36,7 @@ public class ClientHandler extends ChannelHandlerAdapter {
     }
 
     // 通道建立初始化时 发送信息 准备握手验证
+    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
         String authInfo = this.ip + ":" + this.port;
@@ -44,6 +45,7 @@ public class ClientHandler extends ChannelHandlerAdapter {
     }
 
     //当服务器发送认证信息后,开始启动心跳发送
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
         if(msg instanceof String){

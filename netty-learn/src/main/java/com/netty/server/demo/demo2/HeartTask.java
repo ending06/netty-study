@@ -15,7 +15,7 @@ import org.hyperic.sigar.Sigar;
  **/
 public class HeartTask implements Runnable {
 
-    //持有引用,方便读写操作
+    // 持有引用,方便读写操作
     private ChannelHandlerContext ctx;
 
     private HeartInfo heartInfo = new HeartInfo();
