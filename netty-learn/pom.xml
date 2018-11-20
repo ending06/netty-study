@@ -32,6 +32,13 @@
       <version>4.1.9.Final</version>
     </dependency>
 
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit-dep</artifactId>
+      <version>4.10</version>
+      <scope>test</scope>
+    </dependency>
+
     <!--==========================log====================================-->
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -88,6 +95,12 @@
       <groupId>org.hyperic</groupId>
       <artifactId>sigar</artifactId>
       <version>1.6.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty.npn</groupId>
+      <artifactId>npn-api</artifactId>
+      <version>1.1.1.v20141010</version>
     </dependency>
   </dependencies>
 
