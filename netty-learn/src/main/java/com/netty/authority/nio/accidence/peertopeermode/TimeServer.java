@@ -1,4 +1,4 @@
-package com.netty.authority.nio.accidence;
+package com.netty.authority.nio.accidence.peertopeermode;
 
 import java.io.IOException;
 import java.net.ServerSocket;
