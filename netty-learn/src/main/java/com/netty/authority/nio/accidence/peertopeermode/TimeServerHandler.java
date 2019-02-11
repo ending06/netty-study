@@ -47,6 +47,8 @@ public class TimeServerHandler implements Runnable {
                 currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date(System.currentTimeMillis())
                         .toString() : "BAD ORDER";
 
+                System.out.printf("currentTime===>"+currentTime);
+
                 out.print(currentTime);
             }
         } catch (IOException e) {
