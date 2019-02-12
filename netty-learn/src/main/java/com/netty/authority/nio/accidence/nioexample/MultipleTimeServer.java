@@ -106,7 +106,7 @@ public class MultipleTimeServer implements Runnable {
                 sc.configureBlocking(false);
 
                 // add new connection to the selector
-                sc.register(selector, SelectionKey.OP_ACCEPT);
+                sc.register(selector, SelectionKey.OP_READ);
             }
 
             if (key.isReadable()) {
