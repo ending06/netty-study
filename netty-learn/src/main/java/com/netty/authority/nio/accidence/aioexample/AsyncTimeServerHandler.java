@@ -47,7 +47,10 @@ public class AsyncTimeServerHandler implements Runnable {
         }
     }
 
+    /**
+     * 接收客户端连接，异步
+     * */
     private void doAccept() {
-        asynchronousServerSocketChannel.accept(this,new AcceptCompletionHandler());
+        asynchronousServerSocketChannel.accept(this, new AcceptCompletionHandler());
     }
 }
