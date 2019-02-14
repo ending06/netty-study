@@ -49,8 +49,13 @@ public class LineBasedFrameDecoderServer {
     private class ChildChannelHander extends ChannelInitializer<SocketChannel> {
         @Override
         protected void initChannel(SocketChannel ch) throws Exception {
+            // 依次遍历bytebuf中的可读字节，遇到\n \r\n，则认为是结束，从可读位置到结束位置区间的字节组成一行，即是一个以换行符作为结束标志的解码器
             ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
+
+            // 将收到的对象转换为字符串，
             ch.pipeline().addLast(new StringDecoder());
+
+            // 如上两个解码器组合：按行切换的文本解码器，之后继续调用业务处理过程的handler
             ch.pipeline().addLast(new LineBasedDecoderServerHandlder());
         }
     }
