@@ -1,24 +1,21 @@
-package com.netty.authority.nio.accidence.tcppackagexample.linebasedframedecoder;
+package com.netty.authority.nio.accidence.decoderexample.delimiterbasedframedecoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.io.UnsupportedEncodingException;
-
 // --------------------- Change Logs----------------------
 // <p>@author ruirui.qu Initial Created at 2019/2/14<p>
 // -------------------------------------------------------
 
-public class LineBasedDecoderClientHandlder extends ChannelHandlerAdapter {
+public class DelimiterEchoClientHandler2 extends ChannelHandlerAdapter {
 
     private int counter;
 
-    private byte[] request;
+    private static final String ECHO_REQ = "hi.test_2.$_";
 
-    public LineBasedDecoderClientHandlder() {
-        request = ("query time" + System.getProperty("line.separator")).getBytes();
+    public DelimiterEchoClientHandler2() {
     }
 
     /**
@@ -26,26 +23,25 @@ public class LineBasedDecoderClientHandlder extends ChannelHandlerAdapter {
      * */
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        ByteBuf message = null;
-
         for (int i = 0; i < 100; i++) {
-            message = Unpooled.buffer(request.length);
+            ByteBuf byteBuf = Unpooled.copiedBuffer(ECHO_REQ.getBytes());
 
-            message.writeBytes(request);
-
-            ctx.writeAndFlush(message);
+            ctx.writeAndFlush(byteBuf);
         }
     }
 
     /**
-     * 当服务端响应时，客户端的channelRead方法被调用，从byteBuf中读取消息，并打印输出
+     * 收到服务器的响应，将其打印出来
      * */
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        System.out.println("this is " + (++counter) + "times;receive from server: " + msg);
+    }
 
-        String body = (String) msg;
-
-        System.out.println("Now is :" + body + "; the counter is:" + (++counter));
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) {
+        ctx.flush();
     }
 
     @Override
@@ -53,4 +49,5 @@ public class LineBasedDecoderClientHandlder extends ChannelHandlerAdapter {
         throwable.printStackTrace();
         ctx.close();
     }
+
 }
