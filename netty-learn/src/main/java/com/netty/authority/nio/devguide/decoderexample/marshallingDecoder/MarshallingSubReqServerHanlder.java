@@ -1,4 +1,4 @@
-package com.netty.authority.nio.accidence.decoderexample.marshallingDecoder;
+package com.netty.authority.nio.devguide.decoderexample.marshallingDecoder;
 
 import io.netty.channel.ChannelHandlerAdapter;
 

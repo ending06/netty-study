@@ -1,4 +1,4 @@
-package com.netty.authority.nio.accidence.decoderexample.delimiterbasedframedecoder;
+package com.netty.authority.nio.devguide.decoderexample.delimiterbasedframedecoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -9,13 +9,13 @@ import io.netty.channel.ChannelHandlerContext;
 // <p>@author ruirui.qu Initial Created at 2019/2/14<p>
 // -------------------------------------------------------
 
-public class DelimiterEchoClientHandler2 extends ChannelHandlerAdapter {
+public class DelimiterEchoClientHandler extends ChannelHandlerAdapter {
 
     private int counter;
 
-    private static final String ECHO_REQ = "hi.test_2.$_";
+    private static final String ECHO_REQ = "hi.test_1.$_";
 
-    public DelimiterEchoClientHandler2() {
+    public DelimiterEchoClientHandler() {
     }
 
     /**

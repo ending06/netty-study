@@ -1,4 +1,4 @@
-package com.netty.authority.nio.accidence.decoderexample.fixedlengthframedecoder;
+package com.netty.authority.nio.devguide.decoderexample.fixedlengthframedecoder;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;

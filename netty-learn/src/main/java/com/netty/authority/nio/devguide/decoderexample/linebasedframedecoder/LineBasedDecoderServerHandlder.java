@@ -1,4 +1,4 @@
-package com.netty.authority.nio.accidence.decoderexample.linebasedframedecoder;
+package com.netty.authority.nio.devguide.decoderexample.linebasedframedecoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

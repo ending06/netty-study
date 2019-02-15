@@ -1,4 +1,4 @@
-package com.netty.authority.nio.accidence.decoderexample.delimiterbasedframedecoder;
+package com.netty.authority.nio.devguide.decoderexample.delimiterbasedframedecoder;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;

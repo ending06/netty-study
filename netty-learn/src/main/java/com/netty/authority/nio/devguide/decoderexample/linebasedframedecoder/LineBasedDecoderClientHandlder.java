@@ -1,4 +1,4 @@
-package com.netty.authority.nio.accidence.decoderexample.delimiterbasedframedecoder;
+package com.netty.authority.nio.devguide.decoderexample.linebasedframedecoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -9,13 +9,14 @@ import io.netty.channel.ChannelHandlerContext;
 // <p>@author ruirui.qu Initial Created at 2019/2/14<p>
 // -------------------------------------------------------
 
-public class DelimiterEchoClientHandler extends ChannelHandlerAdapter {
+public class LineBasedDecoderClientHandlder extends ChannelHandlerAdapter {
 
     private int counter;
 
-    private static final String ECHO_REQ = "hi.test_1.$_";
+    private byte[] request;
 
-    public DelimiterEchoClientHandler() {
+    public LineBasedDecoderClientHandlder() {
+        request = ("query time" + System.getProperty("line.separator")).getBytes();
     }
 
     /**
@@ -23,25 +24,26 @@ public class DelimiterEchoClientHandler extends ChannelHandlerAdapter {
      * */
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        for (int i = 0; i < 100; i++) {
-            ByteBuf byteBuf = Unpooled.copiedBuffer(ECHO_REQ.getBytes());
+        ByteBuf message = null;
 
-            ctx.writeAndFlush(byteBuf);
+        for (int i = 0; i < 100; i++) {
+            message = Unpooled.buffer(request.length);
+
+            message.writeBytes(request);
+
+            ctx.writeAndFlush(message);
         }
     }
 
     /**
-     * 收到服务器的响应，将其打印出来
+     * 当服务端响应时，客户端的channelRead方法被调用，从byteBuf中读取消息，并打印输出
      * */
-
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        System.out.println("this is " + (++counter) + "times;receive from server: " + msg);
-    }
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
+        String body = (String) msg;
+
+        System.out.println("Now is :" + body + "; the counter is:" + (++counter));
     }
 
     @Override
@@ -49,5 +51,4 @@ public class DelimiterEchoClientHandler extends ChannelHandlerAdapter {
         throwable.printStackTrace();
         ctx.close();
     }
-
 }
