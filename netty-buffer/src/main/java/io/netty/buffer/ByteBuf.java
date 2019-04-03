@@ -19,4 +19,13 @@ public abstract class ByteBuf implements ReferenceCounted, Comparable<ByteBuf> {
      * current buffer size < newCapacity size:会追加一个buffer，其内容未知，大小为(newCapacity size-current buffer size)大小的buffer，
      * */
     public abstract ByteBuf capacity(int newCapacity);
+
+    /**
+     * 返回buffer的最大容量，超过容量则异常
+     * */
+    public abstract int maxCapacity();
+
+    /**
+     * 创建buffer
+     * */
 }
