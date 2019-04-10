@@ -9,17 +9,4 @@ import org.slf4j.helpers.NOPLoggerFactory;
 
 public class Slf4JLoggerFactory extends InternalLoggerFactory {
 
-    public static final InternalLoggerFactory INSTANCE = new Slf4JLoggerFactory();
-
-    @Deprecated
-    public Slf4JLoggerFactory() {
-    }
-
-    Slf4JLoggerFactory(boolean failIfNOP) {
-        // should be always called with true
-        assert failIfNOP;
-        if (LoggerFactory.getILoggerFactory() instanceof NOPLoggerFactory) {
-            throw new NoClassDefFoundError("NOPLoggerFactory not supported");
-        }
-    }
 }
